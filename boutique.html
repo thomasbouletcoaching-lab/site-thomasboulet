@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique — Thomas Boulet Coaching</title>
+  <meta name="description" content="Des outils concrets pour transformer ton corps seul ou avec accompagnement — programmes, guides, templates.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">Thomas Boulet <span>Coaching</span></a>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="guide.html">Guide gratuit</a></li>
+      <li><a href="boutique.html" class="active">Boutique</a></li>
+      <li><a href="protocole.html">Le Protocole</a></li>
+      <li><a href="bilan.html" class="nav__cta">Bilan offert</a></li>
+    </ul>
+    <div class="nav__burger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO PAGE -->
+<section class="hero--page section--navy">
+  <div class="hero--page__inner">
+    <p class="section__eyebrow">Boutique</p>
+    <h1 class="section__title" style="color:white;max-width:640px;">Des outils concrets.<br>Pas des promesses.</h1>
+    <p class="section__subtitle">Tu préfères avancer à ton rythme avec les bons outils entre les mains ? C'est ici.</p>
+  </div>
+</section>
+
+<!-- PRODUITS -->
+<section class="section section--cream">
+  <div class="container">
+    <div class="boutique__grid">
+
+      <!-- GUIDE GRATUIT -->
+      <div class="produit-card">
+        <span class="produit-card__badge">Gratuit</span>
+        <div class="optin__cover" style="width:100px;height:140px;margin:0;">
+          <div class="optin__cover-text" style="font-size:10px;"><em style="font-size:16px;">3H</em> QUI CHANGENT TOUT</div>
+        </div>
+        <h2 class="produit-card__title">Guide "3H Qui Changent Tout"</h2>
+        <p class="produit-card__text">Le système complet pour reconstruire ton corps en 3h par semaine — 4 piliers, expliqués simplement par un coach diplômé STAPS. Musculation fonctionnelle, posture, cardio intelligent, récupération.</p>
+        <a href="guide.html" class="btn btn--primary">Télécharger gratuitement →</a>
+      </div>
+
+      <!-- PROGRAMMES (bientôt) -->
+      <div class="produit-card produit-card--soon">
+        <span class="produit-card__badge produit-card__badge--soon">Bientôt disponible</span>
+        <h2 class="produit-card__title">Programmes d'entraînement</h2>
+        <p class="produit-card__text">Des programmes structurés selon ton matériel et ta disponibilité — maison, poids de corps, powerbuilding, bodybuilding. Pas un PDF générique : un protocole qui suit la logique de surcharge progressive, semaine après semaine.</p>
+      </div>
+
+      <!-- TEMPLATE EXCEL (bientôt) -->
+      <div class="produit-card produit-card--soon">
+        <span class="produit-card__badge produit-card__badge--soon">Bientôt disponible</span>
+        <h2 class="produit-card__title">Template Excel — Suivi Nutrition & Entraînement</h2>
+        <p class="produit-card__text">L'outil de suivi que j'utilise avec mes clients en accompagnement privé. Calcul automatique des besoins caloriques et des macros, suivi des progrès, sans prise de tête.</p>
+      </div>
+
+      <!-- BUNDLE (bientôt) -->
+      <div class="produit-card produit-card--soon">
+        <span class="produit-card__badge produit-card__badge--soon">Bientôt disponible</span>
+        <h2 class="produit-card__title">Bundle Transformation Complète</h2>
+        <p class="produit-card__text">Programmes + guide + template. Tout ce qu'il faut pour avancer seul avec une méthode solide derrière. Le pack complet pour ceux qui veulent tout, sans avoir à choisir.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA ACCOMPAGNEMENT -->
+<section class="section section--navy" style="text-align:center;">
+  <div class="container">
+    <p class="section__eyebrow">Tu veux aller plus loin ?</p>
+    <h2 class="section__title" style="color:white;max-width:560px;margin:0 auto 24px;">Les outils, c'est bien.<br>Un protocole sur-mesure, c'est autre chose.</h2>
+    <p style="color:rgba(255,255,255,0.6);font-size:17px;max-width:480px;margin:0 auto 40px;line-height:1.65;">Si tu veux un accompagnement complet calibré sur ton niveau d'ambition, découvre le Protocole V6, V8 ou V12.</p>
+    <a href="protocole.html" class="btn btn--primary">Découvrir le Protocole →</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <span class="footer__logo">Thomas Boulet <span>Coaching</span></span>
+    <ul class="footer__links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="protocole.html">Le Protocole</a></li>
+      <li><a href="bilan.html">Bilan offert</a></li>
+      <li><a href="https://instagram.com/thomasboulet.coaching" target="_blank">Instagram</a></li>
+      <li><a href="mentions.html">Mentions légales</a></li>
+    </ul>
+    <span class="footer__copy">© 2025 Thomas Boulet Coaching</span>
+  </div>
+</footer>
+
+<script>function toggleMenu(){ document.getElementById('navLinks').classList.toggle('open'); }</script>
+</body>
+</html>
