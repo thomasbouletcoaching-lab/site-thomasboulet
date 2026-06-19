@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide Gratuit — 3H Qui Changent Tout · Thomas Boulet Coaching</title>
+  <meta name="description" content="Télécharge le guide complet pour les hommes 30-45 ans qui veulent transformer leur corps avec 3h par semaine.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">Thomas Boulet <span>Coaching</span></a>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="guide.html" class="active">Guide gratuit</a></li>
+      <li><a href="boutique.html">Boutique</a></li>
+      <li><a href="protocole.html">Le Protocole</a></li>
+      <li><a href="bilan.html" class="nav__cta">Bilan offert</a></li>
+    </ul>
+    <div class="nav__burger" id="burger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<section class="section section--cream" style="padding-top: calc(64px + 80px); min-height: 100vh; display:flex; align-items:center;">
+  <div class="container">
+    <div class="optin__inner">
+
+      <div class="optin__cover">
+        <div class="optin__cover-text">
+          <em>3H</em>
+          QUI CHANGENT<br>TOUT
+        </div>
+      </div>
+
+      <p class="section__eyebrow" style="text-align:center;">Guide offert</p>
+      <h1 class="section__title" style="text-align:center; margin-bottom:16px;">3h par semaine.<br>Un corps qui change.<br>Une vie qui suit.</h1>
+      <p style="text-align:center; font-size:17px; color:var(--grey); line-height:1.65; margin-bottom:40px;">Le guide complet pour les hommes 30–45 ans qui n'ont pas de temps à perdre — et encore moins à gaspiller sur des méthodes qui ne tiennent pas.</p>
+
+      <div id="formGuide">
+        <div class="form-field">
+          <label>Prénom</label>
+          <input type="text" id="gPrenom" placeholder="Ton prénom">
+        </div>
+        <div class="form-field">
+          <label>Nom</label>
+          <input type="text" id="gNom" placeholder="Ton nom">
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" id="gEmail" placeholder="ton@email.com">
+        </div>
+        <div class="form-field">
+          <label>Téléphone <span style="font-weight:400;text-transform:none;color:var(--grey)">(optionnel)</span></label>
+          <input type="tel" id="gTel" placeholder="06 12 34 56 78">
+        </div>
+        <button class="btn btn--primary btn--full" onclick="submitGuide()" id="submitGuide">
+          Recevoir le guide gratuitement →
+        </button>
+        <p class="optin__promise">Aucun spam. Juste ce qui compte.</p>
+      </div>
+
+      <div id="formSuccess" style="display:none; text-align:center;">
+        <div style="font-size:48px;margin-bottom:16px;">✅</div>
+        <p style="font-size:18px;font-weight:600;margin-bottom:12px;">C'est dans ta boîte mail !</p>
+        <p style="color:var(--grey);margin-bottom:32px;">Pendant que tu l'attends, fais le diagnostic pour savoir exactement où tu en es.</p>
+        <a href="https://thomasboulet-diagnosticsituation.netlify.app" class="btn btn--primary">Faire le diagnostic →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <span class="footer__logo">Thomas Boulet <span>Coaching</span></span>
+    <ul class="footer__links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="mentions.html">Mentions légales</a></li>
+    </ul>
+    <span class="footer__copy">© 2025 Thomas Boulet Coaching</span>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+async function submitGuide(){
+  const prenom = document.getElementById('gPrenom').value.trim();
+  const nom    = document.getElementById('gNom').value.trim();
+  const email  = document.getElementById('gEmail').value.trim();
+  const tel    = document.getElementById('gTel').value.trim();
+  const btn    = document.getElementById('submitGuide');
+
+  if(!prenom || !email){
+    alert('Merci de renseigner ton prénom et ton email.');
+    return;
+  }
+
+  btn.textContent = 'Envoi en cours...';
+  btn.disabled = true;
+
+  try {
+    await fetch('https://thomasboulet-diagnosticsituation.netlify.app/.netlify/functions/submit-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        prenom, nom, email, tel,
+        objectif: 'guide',
+        niveau: 'opt-in',
+        source: 'page_guide',
+        listId: 5
+      })
+    });
+  } catch(e) { /* silencieux — on redirige quand même */ }
+
+  // Téléchargement automatique du guide
+  const link = document.createElement('a');
+  link.href = '3h-qui-changent-tout.pdf';
+  link.download = '3H-Qui-Changent-Tout-Thomas-Boulet.pdf';
+  link.click();
+
+  document.getElementById('formGuide').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+</script>
+</body>
+</html>
