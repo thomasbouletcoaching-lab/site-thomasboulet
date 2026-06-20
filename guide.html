@@ -65,8 +65,12 @@
 
       <div id="formSuccess" style="display:none; text-align:center;">
         <div style="font-size:48px;margin-bottom:16px;">✅</div>
-        <p style="font-size:18px;font-weight:600;margin-bottom:12px;">C'est dans ta boîte mail !</p>
-        <p style="color:var(--grey);margin-bottom:32px;">Pendant que tu l'attends, fais le diagnostic pour savoir exactement où tu en es.</p>
+        <p style="font-size:18px;font-weight:600;margin-bottom:12px;">Vérifie ta boîte mail !</p>
+        <p style="color:var(--grey);margin-bottom:24px;">Le guide "3H Qui Changent Tout" vient de t'être envoyé par email, avec le lien pour le télécharger.</p>
+        <p id="fallbackDownload" style="display:none; font-size:14px; color:var(--grey); margin-bottom:24px;">
+          (Si tu ne le reçois pas dans les minutes qui suivent, <a href="3h%20qui%20changent%20tout.pdf" style="color:var(--orange);" download>clique ici pour le télécharger directement</a>.)
+        </p>
+        <p style="color:var(--grey);margin-bottom:32px;">Pendant que tu le lis, fais le diagnostic pour savoir exactement où tu en es.</p>
         <a href="https://thomasboulet-diagnosticsituation.netlify.app" class="btn btn--primary">Faire le diagnostic →</a>
       </div>
 
@@ -105,28 +109,27 @@ async function submitGuide(){
   btn.textContent = 'Envoi en cours...';
   btn.disabled = true;
 
+  let emailEnvoye = false;
+
   try {
-    await fetch('https://thomasboulet-diagnosticsituation.netlify.app/.netlify/functions/submit-lead', {
+    const res = await fetch('/.netlify/functions/submit-guide', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        prenom, nom, email, tel,
-        objectif: 'guide',
-        niveau: 'opt-in',
-        source: 'page_guide',
-        listId: 5
-      })
+      body: JSON.stringify({ prenom, nom, email, tel })
     });
-  } catch(e) { /* silencieux — on redirige quand même */ }
-
-  // Téléchargement automatique du guide
-  const link = document.createElement('a');
-  link.href = '3h%20qui%20changent%20tout.pdf';
-  link.download = '3H-Qui-Changent-Tout-Thomas-Boulet.pdf';
-  link.click();
+    const result = await res.json();
+    emailEnvoye = result.emailSent;
+  } catch(e) {
+    console.error('Erreur envoi:', e);
+  }
 
   document.getElementById('formGuide').style.display = 'none';
   document.getElementById('formSuccess').style.display = 'block';
+
+  if(!emailEnvoye){
+    // Si l'email n'a pas pu partir, on propose quand même le téléchargement direct en secours
+    document.getElementById('fallbackDownload').style.display = 'block';
+  }
 }
 </script>
 </body>
